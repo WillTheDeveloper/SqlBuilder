@@ -4,10 +4,13 @@ namespace SqlBuilder;
 
 public class Select
 {
-    public List<string> parameters;
-    public string Table = "";
-    public List<Selectors> selectors;
+    private List<string> parameters = null!;
+    private string Table = "";
+    private List<Selectors> selectors = null!;
 
+    /// <summary>
+    /// Get the information regarding the new SELECT query
+    /// </summary>
     public void Information()
     {
         Console.WriteLine("What is the name of the table?");
@@ -21,7 +24,7 @@ public class Select
         Console.WriteLine("Enter a selector for WHERE statement which will be added:");
         
         Console.WriteLine("Name of column:");
-
+        
         var wherecolumn = Console.ReadLine();
         
         Console.WriteLine("Enter value to check for");
@@ -30,8 +33,8 @@ public class Select
 
         selectors.Add(new Selectors()
         {
-            Tab = wherecolumn,
-            Param = comparator
+            Tab = wherecolumn!,
+            Param = comparator!
         });
 
         if (columns != "")
@@ -50,6 +53,9 @@ public class Select
         }
     }
 
+    /// <summary>
+    /// Generate the query and output it to the user
+    /// </summary>
     public void Generate()
     {
         Console.Clear();
@@ -60,7 +66,7 @@ public class Select
         {
             outputcolumns = outputcolumns + col! + ",";
         }
-
+        
         if (parameters == null)
         {
             outputcolumns = "*";
